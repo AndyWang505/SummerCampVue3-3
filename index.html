@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummerCampVue3-3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="header">
+            <h1><i id="icons" class="bi bi-alarm"></i>TodoList</h1>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" v-model="text" class="form-control" placeholder="what are you going to do" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button @click="addItem" class="btn btn-outline-secondary" type="button" style="color: rgb(212, 241, 237);"><i class="bi bi-clipboard-plus"></i></button>
+        </div>
+        <div class="card-center">
+            <ul>
+                <li v-for="item in filter" :key="item.id">
+                    <div v-if="item.listItem === false" class="list-item">
+                        <div class="item-check">
+                            <a v-if="item.itemcheck === 1" @click="checkBox(item)" href="#"><i id="icons" class="bi bi-clipboard"></i></a>
+                            <a v-else @click="checkBox(item)" href="#"><i id="icons" class="bi bi-clipboard-check"></i></a>
+                            <label>{{ item.text }}</label>
+                            <a @click="editItem(item)" href="#"><i class="bi bi-pencil-square"></i></a>
+                        </div>
+                        <div class="item-clear">
+                            <a @click="removeItem(item)" href="#"><i id="icons" class="bi bi-clipboard-x"></i></a>
+                        </div>
+                    </div>
+                    <div v-else class="list-Itemedit">
+                        <div class="input-group mb-3">
+                            <input v-model="temp.text" class="form-control" type="text" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button @click="doneEdit(item)" class="btn btn-outline-secondary" type="button" style="color: rgb(212, 241, 237);"><i class="bi bi-check-lg"></i></button>
+                            <button @click="cancelEdit(item)" class="btn btn-outline-secondary" type="button" style="color: rgb(212, 241, 237);"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="card-footer">
+                <div>
+                  <a @click="status = 'All'" href="#" class="me-3"><i class="bi bi-card-text"></i> All</a>
+                  <a @click="status = 'undone'" href="#" class="me-3">Undone</a>
+                  <a @click="status = 'done'" href="#" class="me-3">Done</a>
+                  <a @click="removeAll" href="#">Clear</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="vue.js"></script>
+</html>
